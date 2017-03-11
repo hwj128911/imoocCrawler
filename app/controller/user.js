@@ -5,7 +5,7 @@ exports.login = function (req, res) {
 }
 
 exports.authorization = function (req, res) {
-    if (req.body.password == "webadmin") {
+    if (req.body.password == "") {
         req.session.admin = 1;
         res.redirect('/rollcall');
     } else {
