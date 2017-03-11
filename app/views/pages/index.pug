@@ -1,0 +1,74 @@
+extends ../layout
+block css
+  link(href="css/Index/main.css" ,rel="stylesheet")
+block content
+  .container
+    .row
+      .page-header.clearfix
+        h1.title= title
+        .col-md-4
+          h5= '上次更新时间：'+ updateTime
+        .col-md-8
+          form(method="GET" action="/search")
+            .input-group.col-sm-4.pull-right
+              input.form-control(type="text" , name='q')
+              sapn.input-group-btn
+                button.btn.btn-default(type='submit') 搜索
+  .container
+    .row
+      table.table.table-hover.table-bordered
+        thead
+          tr
+            th imooc
+            if isSearch
+              th 组号
+            th 姓名
+            th 课程
+            th 学习进度
+            th 学习用时
+            th 最近学习
+            th 章节编号
+            th(colspan="3") 回答情况（绿：正确，白：基本正确，红：错误）
+        tbody
+          if message.main.length > 0
+            each item in message.main
+              - var student = item.student
+              - var imooc = item.imooc
+              - var answer = item.answer
+              tr
+                td: a(href='http://www.imooc.com/u/'+student.imoocId+'/courses' target="_black")= student.imoocId
+                if isSearch
+                  td= student.group
+                td= student.name
+                td= imooc.courseName
+                td
+                  if imooc.completePercent == 0
+                    span.danger #{imooc.completePercent}%
+                  else if imooc.completePercent == 100
+                    span.success #{imooc.completePercent}%
+                  else
+                    span #{imooc.completePercent}%
+                td= imooc.useTime
+                td= imooc.chapterTitle
+                td= imooc.chapterId
+                td.success= answer.right
+                td= answer.littleRight
+                td.danger= answer.mistake
+      if totalPages > 1
+        ul.pagination
+          - for (var i=1;i<=totalPages;i++)
+            if (currentPage == i)
+              li.active
+                span= i
+            else
+              if isSearch
+                li: a(href="/search?q="+queryName+"&g="+i)= i
+              else
+                li: a(href="/?g="+i)= i
+  footer.container
+    .row
+      hr
+      p.copyRight &copy Design By Class 152 HWJ
+  script(src="js/require.js" data-main="js/index")
+
+

@@ -1,0 +1,12 @@
+#addButton
+#rightNav
+	ul
+		if title == '点名册'
+			li.active: a.fun(href='/rollcall') 点名册
+			li: a.fun(href='/') 学习情况
+		else if title == 'Web学习情况'
+			li: a.fun(href='/rollcall') 点名册
+			li.active: a.fun(href='/') 学习情况
+	#github
+		span.fa-github.fa-2x
+		a www.llms.online
