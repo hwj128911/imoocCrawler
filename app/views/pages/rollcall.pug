@@ -9,7 +9,7 @@ block content
                 div(id=item.imoocId).photo.photo_front
                     .photo-wrap
                         .side.side-front
-                            p(id="image_"+item.imoocId).image: img(src=item.picture)
+                            p(id="image_"+item.imoocId,data-picture=item.picture).image: img
                             p(id="name_"+item.imoocId).name= item.name
                             p(id="number_"+item.imoocId).number= item.studentId
                         .side.side-back

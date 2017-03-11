@@ -106,45 +106,44 @@ define(['jquery', 'obtain', 'control', 'calculate', "bootstrap"], function ($, o
     var start = function () {
 
 
-
+        let imgs = $('.image');
+        for (let i = imgs.length - 1; i >= 0; i--) {
+            let img = $(imgs[i]);
+            let picture = img.attr("data-picture");
+            img.find('img').get(0).src = picture;
+        }
 
 
         /**
          * 事件绑定
          */
-        (function () {
-
-            for (var i = 0; i < photo.length; i++) {
-                photo[i].onclick = function () {
-                    var cls = this.className;
-                    if (/photo_center/.test(cls)) {
-                        return c.turn(this, startBtn);
-                    }
-                }
-
-                rights[i].onclick = function (e) {
-                    ajaxPost(e, 0);
-                }
-
-                littlerights[i].onclick = function (e) {
-                    ajaxPost(e, 1);
-                }
-
-                mistakes[i].onclick = function (e) {
-                    ajaxPost(e, 2);
+        for (var i = 0; i < photo.length; i++) {
+            photo[i].onclick = function () {
+                var cls = this.className;
+                if (/photo_center/.test(cls)) {
+                    return c.turn(this, startBtn);
                 }
             }
 
-            startBtn.click(function () {
-                startPolling();
-            });
+            rights[i].onclick = function (e) {
+                ajaxPost(e, 0);
+            }
 
-        })();
+            littlerights[i].onclick = function (e) {
+                ajaxPost(e, 1);
+            }
 
-        (function () {
-            c.rsort();
-        })();
+            mistakes[i].onclick = function (e) {
+                ajaxPost(e, 2);
+            }
+        }
 
+        startBtn.click(function () {
+            startPolling();
+        });
+
+
+        c.rsort();
     }
 
 
