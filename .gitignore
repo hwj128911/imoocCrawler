@@ -2,7 +2,7 @@
 .vscode
 test.js
 node_modules
-public/data/imoocs
+public/data
 public/imgs/1
 public/imgs/2
 public/imgs/3
